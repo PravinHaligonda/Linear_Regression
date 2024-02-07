@@ -50,26 +50,17 @@ def compute_gradient(x, y, w, b):
     dj_db (float): Gradient of the cost function with respect to the bias.
     """
 
-    m = x.shape[0]
     dj_dw = 0.0
     dj_db = 0.0
 
     dj_dw_i = 0.0
     dj_db_i = 0.0
 
-    f_wb = np.zeros(m)
-    f_wb = np.dot(x, w) + b
-    # print(f"f_wb: {f_wb}")
-    for i in range(m):
-        dj_dw_i += (f_wb - y[i]) * x[i]
-        # print(f"dj_dw_i: {dj_dw_i}")
-        dj_db_i += (f_wb - y[i])
-        # print(f"dj_db_i: {dj_db_i}")
+    dj_dw_i = np.sum(((np.dot(x, w) + b) - y) * x)
+    dj_db_i = np.sum((np.dot(w, x) + b) - y)
 
-    dj_dw = dj_dw_i / m
-    # print(f"dj_dw: {dj_dw}")
-    dj_db = dj_db_i / m
-    # print(f"dj_db: {dj_db}")
+    dj_dw = dj_dw_i / len(x)
+    dj_db = dj_db_i / len(x)
     return dj_dw, dj_db
 
 def gradient_decent(x, y, w_in, b_in, alpha, num_iters, cost_function, gradient_function):
