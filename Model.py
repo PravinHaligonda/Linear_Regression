@@ -61,6 +61,7 @@ def compute_gradient(x, y, w, b):
 
     dj_dw = dj_dw_i / len(x)
     dj_db = dj_db_i / len(x)
+    
     return dj_dw, dj_db
 
 def gradient_decent(x, y, w_in, b_in, alpha, num_iters, cost_function, gradient_function):
